@@ -492,6 +492,8 @@ def load_algorithms():
         except:
             pass
 
+    algorithms_modules = []
+
     for file in algorithms_files:
         try:
             # Try to import the module and add it to algorithms modules list
