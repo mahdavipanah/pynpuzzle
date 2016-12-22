@@ -225,7 +225,7 @@ def check_puzzle_list(lst, n):
     Checks a puzzle one dimensional list and validates it.
 
     lst : The list to be validated.
-    :param n: Puzzle type (n-puzzle).
+    n : Puzzle type (n-puzzle).
 
      Returns True of it's fine and False if it's not valid.
     """
