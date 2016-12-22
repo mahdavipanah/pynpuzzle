@@ -835,7 +835,10 @@ algorithm_combobox_label = tkinter.Label(algorithm_frame, text="algorithm: ")
 algorithm_combobox_label.grid(row=0, column=0)
 # Algorithm combobox
 algorithm_name = tkinter.StringVar()
-algorithm_combobox = ttk.Combobox(algorithm_frame, textvariable=algorithm_name)
+algorithm_combobox = ttk.Combobox(algorithm_frame,
+                                  textvariable=algorithm_name,
+                                  validate=tkinter.ALL,
+                                  validatecommand=lambda: False)
 algorithm_combobox.grid(row=0, column=1, sticky='EWN')
 
 
