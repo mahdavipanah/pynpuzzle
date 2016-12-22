@@ -219,6 +219,18 @@ def list_to_puzzle(lst):
 
     return puzzle
 
+def puzzle_to_list(puzzle):
+    """
+    Converts a two dimensional puzzle to a one dimensional puzzle.
+
+    [[1, 2, 3], [4, 5, 6], [7, 8, 9]] --> [1, 2, 3, 4, 5, 6, 7, 8, 0]
+    """
+    lst = []
+    for row in puzzle:
+        lst.extend(row)
+
+    return lst
+
 
 def check_puzzle_list(lst, n):
     """
@@ -361,6 +373,11 @@ def piper():
                     output_error = True
 
             if not output_error:
+                # Converts output's puzzles to one dimensional representation of them
+                tmp_lst = []
+                for result in OUTPUT_LST:
+                    tmp_lst.append(puzzle_to_list(result))
+                OUTPUT_LST = tmp_lst
                 # Adds init state as the first step
                 OUTPUT_LST.insert(0, get_puzzle_frame_list(input_puzzle_frame))
 
