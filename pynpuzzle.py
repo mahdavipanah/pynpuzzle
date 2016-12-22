@@ -67,6 +67,8 @@ about_window = None
 #   That always returns false, but sometimes the app itself wants to change the entries values, so temporarily
 #   changes this variable's value to true
 OUTPUT_EDITABLE = False
+# Indicates whether timer thread should clear status bar or not (It's useful when some problems happened)
+timer_clear_status_bar = False
 
 # Main window
 main_window = tkinter.Tk()
@@ -284,6 +286,7 @@ def start_timer():
     """
     global timer_thread
     global timer_event
+    global timer_clear_status_bar
 
     max_ram_var.set('0')
     cpu_var.set('0')
@@ -305,8 +308,14 @@ def start_timer():
 
             timer_event.wait(0.001)
 
+        if timer_clear_status_bar:
+            cpu_var.set('')
+            max_ram_var.set('')
+            ram_var.set('')
+
     timer_event.clear()
 
+    timer_clear_status_bar = False
     timer_thread = threading.Thread(target=timing, daemon=True)
     timer_thread.start()
 
@@ -333,6 +342,7 @@ def piper():
     global OUTPUT_LST
     global OUTPUT_STEP
     global timer_event
+    global timer_clear_status_bar
 
     try:
         # Waits for algorithm to send the result
@@ -388,6 +398,8 @@ def piper():
         # Calculation successfully done!
         #
         # Stop status thread
+        if output_exception or output_error:
+            timer_clear_status_bar = True
         timer_event.set()
 
         calculation_stop()
@@ -900,6 +912,7 @@ def start_button_cmd():
     """
     global output_puzzle_frame
     global search_process
+    global OUTPUT_EDITABLE
 
     # Check if input puzzle has a valid input
     lst = is_input_puzzle_valid(input_puzzle_frame)
@@ -918,6 +931,12 @@ def start_button_cmd():
     output_to_label['text'] = ''
     output_0_label['text'] = ''
     output_step_text.delete(0, tkinter.END)
+    config_io_frame_state(output_labelframe, tkinter.DISABLED)
+    # Clear output puzzle
+    OUTPUT_EDITABLE = True
+    for child in output_puzzle_frame.winfo_children():
+        child.delete(0, tkinter.END)
+    OUTPUT_EDITABLE = False
     # Find the search function of the selected algorithm
     for module in algorithms_modules:
         if module.search.__doc__ == algorithm_name.get():
