@@ -736,7 +736,10 @@ def menu_change_goal_state_command():
                    command=close_window).grid(row=0,
                                               column=4,
                                               sticky='WENS')
-    tkinter.Button(goal_action_frame, text='Change', highlightbackground='Green').grid(row=0, column=5, sticky='WENS')
+    tkinter.Button(goal_action_frame,
+                   text='Change',
+                   highlightbackground='Green',
+                   command=change).grid(row=0, column=5, sticky='WENS')
     goal_action_frame.grid_columnconfigure(0, weight=1, uniform=1)
     goal_action_frame.grid_columnconfigure(1, weight=1, uniform=1)
     goal_action_frame.grid_columnconfigure(2, weight=1, uniform=1)
