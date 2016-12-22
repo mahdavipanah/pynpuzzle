@@ -407,7 +407,7 @@ def piper():
         # If some exception has have happened inside algorithm's function
         if output_exception:
             messagebox.showerror("Algorithm exception", "Some exception happened in algorithm's source code:\n\n" +
-                                 OUTPUT_LST)
+                                 OUTPUT_LST, parent=main_window)
 
             OUTPUT_LST = []
             OUTPUT_STEP = 0
@@ -415,7 +415,7 @@ def piper():
             return
 
         if output_error:
-            messagebox.showerror("Algorithm output error", "Algorithm's output is not valid.")
+            messagebox.showerror("Algorithm output error", "Algorithm's output is not valid.", parent=main_window)
 
             OUTPUT_LST = []
             OUTPUT_STEP = 0
@@ -680,7 +680,7 @@ def menu_change_goal_state_command():
 
         lst = is_input_puzzle_valid(goal_puzzle_frame)
         if not lst:
-            messagebox.showerror("Input error", "Inputs are not valid!")
+            messagebox.showerror("Input error", "Inputs are not valid!", parent=change_goal_window)
             return
 
         GOAL_STATE = lst
@@ -920,7 +920,7 @@ def start_button_cmd():
     # Check if input puzzle has a valid input
     lst = is_input_puzzle_valid(input_puzzle_frame)
     if not lst:
-        messagebox.showerror("Input error", "Inputs are not valid!")
+        messagebox.showerror("Input error", "Inputs are not valid!", parent=main_window)
         return
     # Change widgets's looks
     start_button.grid_remove()
@@ -1144,7 +1144,8 @@ def save_file_cmd(puzzle_frame, parent):
     lst = is_input_puzzle_valid(puzzle_frame)
     if not lst:
         if not messagebox.askokcancel("Input not valid",
-                                      "Input puzzle is not valid, are you sure to save it as a file?"):
+                                      "Input puzzle is not valid, are you sure to save it as a file?",
+                                      parent=parent):
             return
 
     # Open the 'save as file' dialog
@@ -1166,7 +1167,9 @@ def save_file_cmd(puzzle_frame, parent):
         with open(file_name, 'w') as file:
             file.write('\n'.join(file_lines))
     except:
-        messagebox.showerror("Error saving to file", "Some problem happened while saving puzzle to the file.")
+        messagebox.showerror("Error saving to file",
+                             "Some problem happened while saving puzzle to the file.",
+                             parent=parent)
 
 
 # Save to file button widgget
@@ -1209,15 +1212,15 @@ def read_file_cmd(puzzle_frame, parent):
                     lst.extend([int(i) for i in line_split])
 
                     if len(line_split) != len(lines):
-                        messagebox.showerror("Input error", "Puzzle dimension is not valid.")
+                        messagebox.showerror("Input error", "Puzzle dimension is not valid.", parent=parent)
                         return
 
             except ValueError:
-                messagebox.showerror("Input error", "Input must non-number values.")
+                messagebox.showerror("Input error", "Input must non-number values.", parent=parent)
 
             input_puzzle_n = len(lines) ** 2 - 1
             if not check_puzzle_list(lst, input_puzzle_n):
-                messagebox.showerror("Input error", "Puzzle numbers are not valid.")
+                messagebox.showerror("Input error", "Puzzle numbers are not valid.", parent=parent)
                 return
 
             if input_puzzle_n != int(n_spinbox.get()):
@@ -1229,7 +1232,9 @@ def read_file_cmd(puzzle_frame, parent):
             fill_puzzle_frame(puzzle_frame, lst)
 
     except:
-        messagebox.showerror("Error opening input file", "Some problem happened while opening input file.")
+        messagebox.showerror("Error opening input file",
+                             "Some problem happened while opening input file.",
+                             parent=parent)
 
 
 tkinter.Button(input_action_frame, text="Read from file",
