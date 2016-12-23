@@ -10,6 +10,7 @@ License : MIT License
 """
 from copy import deepcopy
 
+
 def is_goal_state(state, goal_state):
     for i in range(len(state)):
         for j in range(len(state)):
