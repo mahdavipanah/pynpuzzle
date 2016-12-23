@@ -65,6 +65,7 @@ class Node():
 
     def expand(self):
         new_states = operator(self.state)
+        self.children = []
         for state in new_states:
             self.children.append(Node(state, self, self.gn + 1, self.depth + 1))
 
