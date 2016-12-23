@@ -541,25 +541,30 @@ def load_algorithms():
 
     algorithms_names = []
     for module in algorithms_modules:
-        algorithm_name = module.search.__doc__
+        search_name = module.search.__doc__
         # If algorithm's name is not defined in search function's docstring
-        if not algorithm_name:
+        if not search_name:
             LOGS.append(
                 log_datetime() + " : Warning : Algorithm's name not defined : " + module.__name__[11:] + '.py\n')
 
-            algorithm_name = module.__name__[11:]
+            search_name = module.__name__[11:]
 
-        module.search.__doc__ = algorithm_name.strip()
+        module.search.__doc__ = search_name.strip()
         algorithms_names.append(module.search.__doc__)
 
     update_logs_text_if_visible()
 
+    prev_algorithm_name = algorithm_name.get()
     # Update algorithms combobox with loaded algorithm's names
     algorithm_combobox['values'] = algorithms_names
     # If there is any loaded algorithms
     if len(algorithms_names):
-        # Select the first algorithm from combobox
-        algorithm_combobox.set(algorithms_names[0])
+        if algorithms_names.count(prev_algorithm_name):
+            # Select the previously selected algorithm
+            algorithm_combobox.set(prev_algorithm_name)
+        else:
+            # Select the first algorithm from combobox
+            algorithm_combobox.set(algorithms_names[0])
 
 
 def menu_reload_algorithms_command():
