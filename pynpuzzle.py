@@ -1087,7 +1087,8 @@ def play_button_command():
         """
         time.sleep(1)
         while not play_event.is_set():
-            if not next_step_button():
+            next_step_button()
+            if OUTPUT_STEP == int(output_to_label['text']):
                 output_stop_button_cmd()
                 return
             play_event.wait(1)
