@@ -1337,6 +1337,8 @@ def available_ram_display():
 
 
 threading.Thread(target=available_ram_display, daemon=True).start()
-
-# Show the main window
-main_window.mainloop()
+if __name__ == '__main__':
+	# Support windows binary freezing
+	multiprocessing.freeze_support()
+    # Show the main window
+    main_window.mainloop()
