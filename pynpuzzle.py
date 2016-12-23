@@ -389,8 +389,6 @@ def piper():
                 for result in OUTPUT_LST:
                     tmp_lst.append(puzzle_to_list(result))
                 OUTPUT_LST = tmp_lst
-                # Adds init state as the first step
-                OUTPUT_LST.insert(0, get_puzzle_frame_list(input_puzzle_frame))
 
     except EOFError:
         # Stop button pressed
