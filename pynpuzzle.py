@@ -880,6 +880,7 @@ def stop_button_cmd():
     threading.Timer(0.01, cpu_var.set, args=('',)).start()
     threading.Timer(0.01, ram_var.set, args=('',)).start()
 
+
 # Action buttons
 #
 # Output stop widget and it's border frame
@@ -1337,8 +1338,9 @@ def available_ram_display():
 
 
 threading.Thread(target=available_ram_display, daemon=True).start()
+
 if __name__ == '__main__':
-	# Support windows binary freezing
-	multiprocessing.freeze_support()
+    # Support windows binary freezing
+    multiprocessing.freeze_support()
     # Show the main window
     main_window.mainloop()
