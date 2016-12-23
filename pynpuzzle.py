@@ -629,9 +629,9 @@ def menu_bar_about_command():
     # Logs window
     about_window = tkinter.Toplevel(main_window)
     about_window.title("About pynpuzzle")
-    about_window.minsize(width=400, height=252)
-    about_window.maxsize(width=400, height=252)
-    about_window.geometry('400x252')
+    about_window.minsize(width=400, height=270)
+    about_window.maxsize(width=400, height=270)
+    about_window.geometry('400x270')
     about_window.resizable(0, 0)
     about_window.lift()
     tkinter.Label(about_window, text="pynpuzzle", font="TkDefaultFont 15 bold").pack(pady=(15, 10))
