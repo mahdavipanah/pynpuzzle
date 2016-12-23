@@ -221,6 +221,7 @@ def list_to_puzzle(lst):
 
     return puzzle
 
+
 def puzzle_to_list(puzzle):
     """
     Converts a two dimensional puzzle to a one dimensional puzzle.
@@ -848,6 +849,7 @@ def calculation_stop():
     """
     # Show start button
     start_button.grid()
+    start_button_border_frame.grid()
     # Hide progress bar
     progress_bar.grid_remove()
     progress_bar.stop()
@@ -876,13 +878,15 @@ def stop_button_cmd():
     threading.Timer(0.01, cpu_var.set, args=('',)).start()
     threading.Timer(0.01, ram_var.set, args=('',)).start()
 
-
 # Action buttons
-stop_button = tkinter.Button(main_window, text="Stop", highlightbackground='Red', state=tkinter.DISABLED,
+#
+# Output stop widget and it's border frame
+stop_button_border_frame = tkinter.Frame(main_window, bg='Red')
+stop_button_border_frame.grid(row=1, column=0, sticky='EWN', padx=5, pady=5)
+stop_button_border_frame.grid_columnconfigure(0, weight=1)
+stop_button = tkinter.Button(stop_button_border_frame, text="Stop", state=tkinter.DISABLED,
                              command=lambda: stop_button_cmd())
-stop_button.grid(row=1, column=0,
-                 sticky='EWN', padx=5,
-                 pady=5)
+stop_button.grid(row=0, column=0, sticky='EWN', padx=1, pady=1)
 
 
 def is_input_puzzle_valid(puzzle_frame):
@@ -929,6 +933,7 @@ def start_button_cmd():
         return
     # Change widgets's looks
     start_button.grid_remove()
+    start_button_border_frame.grid_remove()
     progress_bar.grid()
     progress_bar.start()
     stop_button['state'] = tkinter.NORMAL
@@ -960,13 +965,12 @@ def start_button_cmd():
     start_timer()
 
 
-# Start button widget
-start_button = tkinter.Button(main_window, text="Start", highlightbackground='Green', command=start_button_cmd)
-start_button.grid(row=1,
-                  column=1,
-                  sticky='EWN',
-                  padx=5,
-                  pady=5)
+# Start button widget and it's border frame
+start_button_border_frame = tkinter.Frame(main_window, bg='Green')
+start_button_border_frame.grid(row=1, column=1, sticky='EWN', padx=5, pady=5)
+start_button_border_frame.grid_columnconfigure(0, weight=1)
+start_button = tkinter.Button(start_button_border_frame, text="Start", command=start_button_cmd)
+start_button.grid(row=0, column=0, sticky='WENS', padx=1, pady=1)
 # Progress bar widget
 progress_bar = ttk.Progressbar(main_window, mode='indeterminate', maximum=20)
 progress_bar.grid(row=1, column=1, sticky='EW', padx=5, pady=5)
