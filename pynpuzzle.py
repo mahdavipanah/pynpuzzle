@@ -733,16 +733,18 @@ def menu_change_goal_state_command():
     tkinter.Button(goal_action_frame, text='Default',
                    command=lambda: fill_puzzle_frame(goal_puzzle_frame, [i for i in range(len(GOAL_STATE))])).grid(
         row=0, column=3, sticky='WENS')
-    tkinter.Button(goal_action_frame,
+    goal_cancel_border_frame = tkinter.Frame(goal_action_frame, bg='Red')
+    goal_cancel_border_frame.grid(row=0, column=4, sticky='WENS')
+    goal_cancel_border_frame.grid_columnconfigure(0, weight=1)
+    tkinter.Button(goal_cancel_border_frame,
                    text='Cancel',
-                   highlightbackground='Red',
-                   command=close_window).grid(row=0,
-                                              column=4,
-                                              sticky='WENS')
-    tkinter.Button(goal_action_frame,
+                   command=close_window).grid(row=0, column=0, sticky='WENS', padx=1, pady=1)
+    goal_change_border_frame = tkinter.Frame(goal_action_frame, bg='Green')
+    goal_change_border_frame.grid(row=0, column=5, sticky='WENS')
+    goal_change_border_frame.grid_columnconfigure(0, weight=1)
+    tkinter.Button(goal_change_border_frame,
                    text='Change',
-                   highlightbackground='Green',
-                   command=change).grid(row=0, column=5, sticky='WENS')
+                   command=change).grid(row=0, column=0, sticky='WENS', padx=1, pady=1)
     goal_action_frame.grid_columnconfigure(0, weight=1, uniform=1)
     goal_action_frame.grid_columnconfigure(1, weight=1, uniform=1)
     goal_action_frame.grid_columnconfigure(2, weight=1, uniform=1)
