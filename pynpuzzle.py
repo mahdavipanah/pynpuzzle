@@ -879,9 +879,9 @@ def stop_button_cmd():
     # Stop timer thread and stop refreshing status bar
     timer_event.set()
     # Clear status labels
-    threading.Timer(0.01, max_ram_var.set, args=('',)).start()
-    threading.Timer(0.01, cpu_var.set, args=('',)).start()
-    threading.Timer(0.01, ram_var.set, args=('',)).start()
+    threading.Timer(0.1, max_ram_var.set, args=('',)).start()
+    threading.Timer(0.1, cpu_var.set, args=('',)).start()
+    threading.Timer(0.1, ram_var.set, args=('',)).start()
 
 
 # Action buttons
