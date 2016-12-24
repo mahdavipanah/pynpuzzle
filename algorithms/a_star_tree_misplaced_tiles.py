@@ -27,7 +27,7 @@ def search(state, goal_state):
         misplace_count = 0
         for i in range(len(node.state)):
             for j in range(len(node.state)):
-                tile_i, tile_j = tiles_places[node.state[i][j]]
+                tile_i, tile_j = tiles_places[node.state[i][j]][1]
                 if i != tile_i or j != tile_j:
                     misplace_count += 1
         return misplace_count
