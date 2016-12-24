@@ -956,6 +956,8 @@ def start_button_cmd():
     # Clear output puzzle
     OUTPUT_EDITABLE = True
     for child in output_puzzle_frame.winfo_children():
+        if child.get().strip() == '':
+            child['highlightbackground'] = output_step_text['highlightbackground']
         child.delete(0, tkinter.END)
     OUTPUT_EDITABLE = False
     # Find the search function of the selected algorithm
