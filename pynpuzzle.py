@@ -20,10 +20,12 @@ from importlib import import_module
 import multiprocessing
 import threading
 import time
+from copy import deepcopy
 
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import simpledialog
 from tkinter import filedialog, scrolledtext
 
 import psutil
@@ -1297,9 +1299,87 @@ def random_button_command(puzzle_frame):
 tkinter.Button(input_action_frame,
                text="Random",
                command=lambda: random_button_command(input_puzzle_frame)).grid(row=0,
-                                                                               column=2,
+                                                                               column=3,
                                                                                sticky='WENS',
-                                                                               columnspan=2)
+                                                                               columnspan=1)
+
+
+def operator(puzzle):
+    """
+    Returns all possible puzzle's states that are reachable from current puzzle's state
+    """
+    states = []
+
+    zero_i = None
+    zero_j = None
+
+    for i in range(len(puzzle)):
+        for j in range(len(puzzle)):
+            if puzzle[i][j] == 0:
+                zero_i = i
+                zero_j = j
+                break
+
+    def add_swap(i, j):
+        new_state = deepcopy(puzzle)
+        new_state[i][j], new_state[zero_i][zero_j] = new_state[zero_i][zero_j], new_state[i][j]
+        states.append(new_state)
+
+    if zero_i != 0:
+        add_swap(zero_i - 1, zero_j)
+
+    if zero_j != 0:
+        add_swap(zero_i, zero_j - 1)
+
+    if zero_i != len(puzzle) - 1:
+        add_swap(zero_i + 1, zero_j)
+
+    if zero_j != len(puzzle) - 1:
+        add_swap(zero_i, zero_j + 1)
+
+    return states
+
+
+def puzzles_equal(first, second):
+    for i in range(len(first)):
+        for j in range(len(first)):
+            if first[i][j] != second[i][j]:
+                return False
+    return True
+
+
+def n_step_random_command():
+    """
+    Generates a random puzzle that can be solved in n-step.
+    """
+    n_step = simpledialog.askinteger("n-step random", "Enter number of steps:", parent=main_window)
+
+    if not n_step:
+        return
+
+    puzzle = list_to_puzzle(GOAL_STATE)
+    prev_puzzle = puzzle
+    for i in range(n_step):
+        new_puzzles = operator(puzzle)
+
+        for i in range(len(new_puzzles)):
+            if puzzles_equal(new_puzzles[i], prev_puzzle):
+                del new_puzzles[i]
+                break
+
+        prev_puzzle = puzzle
+        puzzle = new_puzzles[random.randrange(0, len(new_puzzles))]
+
+    fill_puzzle_frame(input_puzzle_frame, puzzle_to_list(puzzle))
+
+
+# Input's n-step random button widget
+tkinter.Button(input_action_frame,
+               text="n-step random",
+               command=n_step_random_command).grid(row=0,
+                                                   column=2,
+                                                   sticky='WENS',
+                                                   columnspan=1)
 
 # Status bar
 status_frame = tkinter.Frame(main_window, bd=1, relief=tkinter.SUNKEN)
