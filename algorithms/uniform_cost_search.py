@@ -13,6 +13,7 @@ from .util import best_first_seach as bfs
 
 def search(state, goal_state):
     """Uniform-cost search"""
+
     def gn(node):
         return node.gn()
 

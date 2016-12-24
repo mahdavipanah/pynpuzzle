@@ -11,6 +11,7 @@ License : MIT License
 from .util.tree_search import Node
 from collections import deque
 
+
 def search(state, goal_state):
     """Breadth-first search"""
     queue = deque()

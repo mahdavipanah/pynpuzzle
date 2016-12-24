@@ -52,7 +52,7 @@ def operator(state):
     return states
 
 
-class Node():
+class Node:
     def __init__(self, state=None, parent=None, cost=0, depth=0, children=[]):
         self.state = state
         self.parent = parent
@@ -71,7 +71,7 @@ class Node():
 
     def parents(self):
         current_node = self
-        while current_node.parent != None:
+        while current_node.parent:
             yield current_node.parent
             current_node = current_node.parent
 

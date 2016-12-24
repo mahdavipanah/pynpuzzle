@@ -11,6 +11,7 @@ License : MIT License
 import heapq
 from .tree_search import Node
 
+
 def search(state, goal_state, fn):
     """Best-first search"""
     queue = []
@@ -31,4 +32,3 @@ def search(state, goal_state, fn):
     output.reverse()
 
     return output
-
