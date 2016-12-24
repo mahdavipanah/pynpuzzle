@@ -53,10 +53,10 @@ def operator(state):
 
 
 class Node():
-    def __init__(self, state=None, parent=None, gn=0, depth=0, children=[]):
+    def __init__(self, state=None, parent=None, cost=0, depth=0, children=[]):
         self.state = state
         self.parent = parent
-        self.gn = gn
+        self.cost = cost
         self.depth = depth
         self.children = children
 
@@ -67,10 +67,17 @@ class Node():
         new_states = operator(self.state)
         self.children = []
         for state in new_states:
-            self.children.append(Node(state, self, self.gn + 1, self.depth + 1))
+            self.children.append(Node(state, self, self.cost + 1, self.depth + 1))
 
     def parents(self):
         current_node = self
         while current_node.parent != None:
             yield current_node.parent
             current_node = current_node.parent
+
+    def gn(self):
+        costs = self.cost
+        for parent in self.parents():
+            costs += parent.cost
+
+        return costs
