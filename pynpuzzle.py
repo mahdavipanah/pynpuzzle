@@ -934,6 +934,9 @@ def start_button_cmd():
     global search_process
     global OUTPUT_EDITABLE
 
+    if not len(algorithms_modules):
+        return
+
     # Check if input puzzle has a valid input
     lst = is_input_puzzle_valid(input_puzzle_frame)
     if not lst:
