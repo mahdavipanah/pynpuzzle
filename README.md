@@ -8,6 +8,7 @@ It is written in [Python](https://www.python.org/) and uses [tkinter](https://wi
 
 ### Prerequisites
 - [Python3.5+](https://www.python.org/)
+- [tkinter](https://wiki.python.org/moin/TkInter)
 - [psutil](https://github.com/giampaolo/psutil)
 
 ### Debian Linux (Ubuntu)
