@@ -45,7 +45,7 @@ And finally, function should return an m\*n\*n three dimensional list which repr
 
 Logs about algorithm's modules can be seen from menubar's *Show logs* item.
 
-These algorithms are included in the app and can be used as code examples for adding new algorithms:
+These algorithms are included in the app and can be used as code examples for adding new and more complex algorithms:
   - [A* tree search algorithm using manhattan distance heuristic](./algorithms/a_star_tree_manhattan_distance.py)
   - [A* tree search algorithm using misplaced tiles heuristic](./algorithms/a_star_tree_misplaced_tiles.py)
   - [Breadth-first search algorithm](./algorithms/breadth_first_search.py)
