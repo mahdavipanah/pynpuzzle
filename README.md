@@ -1,5 +1,3 @@
-![pynpuzzle](http://mahdavipanah.com/blog/wp-content/uploads/2016/12/pynpuzzle.png)
-
 pynpuzzle is an application that helps you to solve n-puzzle problem and also to test your algorithms for n-puzzle problem.
 It is written in [Python](https://www.python.org/) and uses [tkinter](https://wiki.python.org/moin/TkInter) for it's graphical interface.
 
