@@ -1425,10 +1425,9 @@ def available_ram_display():
         available_ram_var.set(round(psutil.virtual_memory().available / (2 ** 20), 3))
         time.sleep(0.001)
 
-
-threading.Thread(target=available_ram_display, daemon=True).start()
-
 if __name__ == '__main__':
+    threading.Thread(target=available_ram_display, daemon=True).start()
+
     # Support windows binary freezing
     multiprocessing.freeze_support()
     # Show the main window
